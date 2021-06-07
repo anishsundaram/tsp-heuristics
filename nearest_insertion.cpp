@@ -1,4 +1,4 @@
-arbitrary_insertion(uint start){//Takes in a value for the arbitrary start location i, usually 0
+double arbitrary_insertion(uint start){//Takes in a value for the arbitrary start location i, usually 0
     partial_tour.push_back(start);
     unordered_set<int> visited;
     visited.insert(start);
@@ -19,7 +19,7 @@ arbitrary_insertion(uint start){//Takes in a value for the arbitrary start locat
     total_weight += 2 * min_tour;
     visited.insert(initial_index);
     partial_tour.push_back(initial_index); //Add J to partial tour (i,j,i)
-    partial_tour.push_back(0);
+    partial_tour.push_back(start);
     
     double min_ckj=0;
     uint k = 0;

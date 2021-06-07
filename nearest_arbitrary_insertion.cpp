@@ -17,7 +17,7 @@ double arbitrary_insertion(uint start){   //Takes in a value for the arbitrary s
     }
     total_weight += 2 * min;    //add two of min weight for underestimate
     partial_tour.push_back(initial_index);
-    partial_tour.push_back(0);
+    partial_tour.push_back(start);
     
     //Find the edge{i, j}, belonging to the partial tour, that minimizes cik +ckj −cij.  Insert kbetween i and j
     for (uint possible_stops = 1; possible_stops < num_vertices; ++possible_stops){
