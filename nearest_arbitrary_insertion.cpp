@@ -1,5 +1,5 @@
 
-double ArbInsert(uint start){   //Takes in a value for the arbitrary start location i, usually 0
+double arbitrary_insertion(uint start){   //Takes in a value for the arbitrary start location i, usually 0
     partial_tour.push_back(start); //insert starting point into mst vector
     uint initial_index = 0;
     uint stop_index = 0;
@@ -9,9 +9,9 @@ double ArbInsert(uint start){   //Takes in a value for the arbitrary start locat
     {
         if(i == start)//Skip start
             continue;
-        if (vertices[0].edge_length(vertices[i],MST_flag)< min)
+        if (vertices[0].get_edge_length(vertices[i],MST_flag)< min)
         {
-            min = vertices[0].edge_length(vertices[i],MST_flag);
+            min = vertices[0].get_edge_length(vertices[i],MST_flag);
             initial_index = i;
         }
     }
@@ -26,9 +26,9 @@ double ArbInsert(uint start){   //Takes in a value for the arbitrary start locat
             continue;
         }
         for(uint tour_stop = 0; tour_stop < partial_tour.size()-1; ++tour_stop){
-            double temp_weight = vertices[partial_tour[tour_stop]].edge_length(vertices[possible_stops],MST_flag)   //Calculates length of cik
-            + vertices[partial_tour[tour_stop+1]].edge_length(vertices[possible_stops],MST_flag)    //Calculates length of ckj
-            - vertices[partial_tour[tour_stop]].edge_length(vertices[partial_tour[tour_stop+1]],MST_flag);
+            double temp_weight = vertices[partial_tour[tour_stop]].get_edge_length(vertices[possible_stops],MST_flag)   //Calculates length of cik
+            + vertices[partial_tour[tour_stop+1]].get_edge_length(vertices[possible_stops],MST_flag)    //Calculates length of ckj
+            - vertices[partial_tour[tour_stop]].get_edge_length(vertices[partial_tour[tour_stop+1]],MST_flag);
             if(temp_weight < min){
                 min = temp_weight;
                 stop_index = tour_stop;
@@ -40,12 +40,12 @@ double ArbInsert(uint start){   //Takes in a value for the arbitrary start locat
     }
     partial_tour.pop_back();// to prevent recounting start location
    
-    cout << std::fixed<< std::setprecision(2) << total_weight << '\n';
+    std::cout << std::fixed<< std::setprecision(2) << total_weight << '\n';
     //Always show 2 decimal places
     for(uint i = 0; i < partial_tour.size(); ++i){ //print list
-        cout << partial_tour[i] << " ";
+        std::cout << partial_tour[i] << " ";
         }
     
     return 0;
-}//ArbInsert(uint start)
+}//arbitrary_insertion(uint start)
 
