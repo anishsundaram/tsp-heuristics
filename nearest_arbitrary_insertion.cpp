@@ -9,9 +9,9 @@ double arbitrary_insertion(uint start){   //Takes in a value for the arbitrary s
     {
         if(i == start)//Skip start
             continue;
-        if (vertices[0].get_edge_length(vertices[i],MST_flag)< min)
+        if (vertices[0].get_edge_length_MST(vertices[i],MST_flag)< min)
         {
-            min = vertices[0].get_edge_length(vertices[i],MST_flag);
+            min = vertices[0].get_edge_length_MST(vertices[i],MST_flag);
             initial_index = i;
         }
     }
@@ -20,15 +20,15 @@ double arbitrary_insertion(uint start){   //Takes in a value for the arbitrary s
     partial_tour.push_back(start);
     
     //Find the edge{i, j}, belonging to the partial tour, that minimizes cik +ckj −cij.  Insert kbetween i and j
-    for (uint possible_stops = 1; possible_stops < num_vertices; ++possible_stops){
+    for (uint possible_stops = 0; possible_stops < num_vertices; ++possible_stops){
         min = std::numeric_limits<double>::max();
         if(possible_stops == initial_index || possible_stops == start){
             continue;
         }
         for(uint tour_stop = 0; tour_stop < partial_tour.size()-1; ++tour_stop){
-            double temp_weight = vertices[partial_tour[tour_stop]].get_edge_length(vertices[possible_stops],MST_flag)   //Calculates length of cik
-            + vertices[partial_tour[tour_stop+1]].get_edge_length(vertices[possible_stops],MST_flag)    //Calculates length of ckj
-            - vertices[partial_tour[tour_stop]].get_edge_length(vertices[partial_tour[tour_stop+1]],MST_flag);
+            double temp_weight = vertices[partial_tour[tour_stop]].get_edge_length_MST(vertices[possible_stops],MST_flag)   //Calculates length of cik
+            + vertices[partial_tour[tour_stop+1]].get_edge_length_MST(vertices[possible_stops],MST_flag)    //Calculates length of ckj
+            - vertices[partial_tour[tour_stop]].get_edge_length_MST(vertices[partial_tour[tour_stop+1]],MST_flag);
             if(temp_weight < min){
                 min = temp_weight;
                 stop_index = tour_stop;
